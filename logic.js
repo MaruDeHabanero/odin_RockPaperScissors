@@ -20,7 +20,7 @@ function getComputerChoice(){
 }
 
 function getHumanChoice(){
-	let humanChoice = Number(prompt("1. Rock\n2. Paper\n3. Scissors"));
+	let humanChoice = Number(prompt("Please enter an integer!\n1. Rock\n2. Paper\n3. Scissors"));
 	return stringChoice(humanChoice);
 }
 
