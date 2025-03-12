@@ -4,7 +4,7 @@ let computerScore = 0;
 let choices = ["rock", "paper", "scissors"];
 
 function getComputerChoice(){
-	let computerChoice = Math.floor(Math.random() * 3) + 1;
+	let computerChoice = Math.floor(Math.random() * 3);
 	return choices[computerChoice];
 }
 
@@ -76,17 +76,15 @@ function playGame(humanChoice){
 let botones = document.querySelector(".button_container");
 	
 botones.addEventListener('click', (e) => {
-	switch(e.target.id){
+	const boton = e.target.closest('button[id]');
+	switch(boton.id){
 		case 'rock':
-			console.log("Picked Rock!");
 			playGame(choices[0]);
 			break;
 		case 'paper':
-			console.log("Picked Paper!");
 			playGame(choices[1]);
 			break;
 		case 'scissors':
-			console.log("Picked Scissors!");
 			playGame(choices[2]);
 			break;
 	}
