@@ -1,31 +1,15 @@
 let humanScore = 0;
 let computerScore = 0;
 
-function stringChoice(choice){
-	switch (choice){
-		case 1:
-			return "rock";
-		case 2:
-			return "paper";
-		case 3:
-			return "scissors";
-		default:
-			return undefined;
-	}
-}
+let choices = ["rock", "paper", "scissors"];
 
 function getComputerChoice(){
 	let computerChoice = Math.floor(Math.random() * 3) + 1;
-	return stringChoice(computerChoice);
+	return choices[computerChoice];
 }
 
-function getHumanChoice(){
-	let humanChoice = Number(prompt("Please enter an integer!\n1. Rock\n2. Paper\n3. Scissors"));
-	return stringChoice(humanChoice);
-}
-
-function playGame(){
-	function playRound(humanChoice, computerChoice){
+function playGame(humanChoice){
+	function playRound(computerChoice){
 		if (humanChoice == computerChoice){
 			console.log("It's a tie!")
 			return;
@@ -82,17 +66,28 @@ function playGame(){
 		}
 	}
 
-	let humanChoice = "";
-	let computerChoice = "";
+	computer = getComputerChoice();
 
-	for (let i = 0; i < 5; i++){
-		human = getHumanChoice();
-		computer = getComputerChoice();
+	playRound(computer);
 
-		playRound(human, computer);
-	}
-
-	checkScores();
+	// checkScores();
 }
 
-playGame();
+let botones = document.querySelector(".button_container");
+	
+botones.addEventListener('click', (e) => {
+	switch(e.target.id){
+		case 'rock':
+			console.log("Picked Rock!");
+			playGame(choices[0]);
+			break;
+		case 'paper':
+			console.log("Picked Paper!");
+			playGame(choices[1]);
+			break;
+		case 'scissors':
+			console.log("Picked Scissors!");
+			playGame(choices[2]);
+			break;
+	}
+});

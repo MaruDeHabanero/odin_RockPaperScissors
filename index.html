@@ -4,9 +4,30 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Rock Paper Scissors!</title>
-	<script src="logic.js"></script>
+
+	<link rel="stylesheet" href="style.css">
+
 </head>
 <body>
-	<h1>Rock Paper Scissors!</h1>
+	<div class="main_container">
+		<h1>Rock Paper Scissors!</h1>
+
+		<div class="button_container">
+			<button id="rock">
+				<img src="./img/fist.png" alt="">
+			</button>
+			<button id="paper">
+				<img src="./img/hand-paper.png" alt="">
+			</button>
+			<button id="scissors">
+				<img src="./img/scissors.png" alt="">
+			</button>
+		</div>
+
+		<p id="veredict"></p>
+		<p id="description"></p>
+	</div>
+
+	<script src="logic.js"></script>
 </body>
 </html>
