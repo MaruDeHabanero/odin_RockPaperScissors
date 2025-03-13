@@ -1,7 +1,31 @@
 let humanScore = 0;
 let computerScore = 0;
+let rounds = 0;
 
-let choices = ["rock", "paper", "scissors"];
+const choices = ["rock", "paper", "scissors"];
+const WIN = "You Win!";
+const LOSE = "You Lose!";
+
+const botones = document.querySelector(".button_container");
+const computerChoiceParagraph = document.querySelector("#computerChoice");
+const resultsDiv = document.querySelector("div.result_container");
+// Inside resultsDiv
+const victoryParagraph = document.createElement("h3");
+const message = document.createElement("p");
+const counter = document.createElement("p");
+resultsDiv.appendChild(victoryParagraph);
+resultsDiv.appendChild(message);
+resultsDiv.appendChild(counter);
+
+computerChoiceParagraph.style.cssText += 'color: red;'
+
+botones.addEventListener('click', (e) => {
+	//// Gonna need to research more about this.
+	const boton = e.target.closest('button[id]'); // CSS Selector, every button with an ID attribute
+	if (!boton) return;
+
+	playGame(boton.id);
+});
 
 function getComputerChoice(){
 	let computerChoice = Math.floor(Math.random() * 3);
@@ -11,7 +35,8 @@ function getComputerChoice(){
 function playGame(humanChoice){
 	function playRound(computerChoice){
 		if (humanChoice == computerChoice){
-			console.log("It's a tie!")
+			victoryParagraph.textContent = "It's a TIE!";
+			message.textContent = "";
 			return;
 		}
 	
@@ -19,32 +44,38 @@ function playGame(humanChoice){
 		// Win statement
 	
 		switch (humanChoice){
-			case "rock":
-				if (computerChoice == "paper"){
-					console.log("You lose! Rock loses to paper.");
+			case choices[0]:
+				if (computerChoice == choices[1]){
+					victoryParagraph.textContent = LOSE;
+					message.textContent = "Rock loses to paper.";
 					computerScore++;
 				} else {
-					console.log("You win! Rock destroys scissors.");
+					victoryParagraph.textContent = WIN;
+					message.textContent = "Rock destroys scissors.";
 					humanScore++;
 				}
 				break;
 	
-			case "paper":
-				if (computerChoice == "scissors"){
-					console.log("You lose! Paper loses to scissors.");
+			case choices[1]:
+				if (computerChoice == choices[2]){
+					victoryParagraph.textContent = LOSE;
+					message.textContent = "Paper loses to scissors.";
 					computerScore++;
 				} else {
-					console.log("You win! Paper covers rock.");
+					victoryParagraph.textContent = WIN;
+					message.textContent = "Paper covers rock.";
 					humanScore++;
 				}
 				break;
 	
-			case "scissors":
-				if (computerChoice == "rock"){
-					console.log("You lose! Scissors loses to rock.");
+			case choices[2]:
+				if (computerChoice == choices[0]){
+					victoryParagraph.textContent = LOSE;
+					message.textContent = "Scissors loses to rock.";
 					computerScore++;
 				} else {
-					console.log("You win! Scissors cut through paper.")
+					victoryParagraph.textContent = WIN;
+					message.textContent = "Scissors cut through paper.";
 					humanScore++;
 				}
 				break;
@@ -52,11 +83,13 @@ function playGame(humanChoice){
 				console.log("There's something wrong with humanChoice...");
 				return;
 		}
-	
-		console.log(`Human: ${humanScore}\nComputer: ${computerScore}`);
+		
+		counter.textContent = `Human: ${humanScore}\nComputer: ${computerScore}`
 	}
 
 	function checkScores(){
+		if (counter != 5) return;
+
 		if (humanScore == computerScore){
 			console.log("It's a tie! Nobody wins!");
 		} else if (humanScore > computerScore) {
@@ -67,25 +100,9 @@ function playGame(humanChoice){
 	}
 
 	computer = getComputerChoice();
+	computerChoiceParagraph.textContent = `Computer choice: ${computer}`;
 
 	playRound(computer);
 
-	// checkScores();
+	checkScores();
 }
-
-let botones = document.querySelector(".button_container");
-	
-botones.addEventListener('click', (e) => {
-	const boton = e.target.closest('button[id]');
-	switch(boton.id){
-		case 'rock':
-			playGame(choices[0]);
-			break;
-		case 'paper':
-			playGame(choices[1]);
-			break;
-		case 'scissors':
-			playGame(choices[2]);
-			break;
-	}
-});
