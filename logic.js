@@ -1,6 +1,5 @@
 let humanScore = 0;
 let computerScore = 0;
-let rounds = 0;
 
 const choices = ["rock", "paper", "scissors"];
 const WIN = "You Win!";
@@ -88,19 +87,24 @@ function playGame(humanChoice){
 	}
 
 	function checkScores(){
-		if (counter != 5) return;
+		if (humanScore < 5 && computerScore < 5) return;
+		
+		const winner = humanScore > computerScore ? "Human" : "Computer";
 
-		if (humanScore == computerScore){
-			console.log("It's a tie! Nobody wins!");
-		} else if (humanScore > computerScore) {
-			console.log("Human wins!");
-		} else {
-			console.log("Computer wins!");
-		}
+		// Selects all buttons from .button_container
+		// It's read from right to left, for it to make sense lol
+		document.querySelectorAll(".button_container button").forEach((button)=> {
+			button.disabled = true;
+		});
+
+		const winnerParagraph = document.createElement("p");
+		winnerParagraph.innerHTML = `<strong>${winner} wins!</strong>\nPlease reload the page to play again.`
+
+		document.querySelector(".result_container").appendChild(winnerParagraph);
 	}
 
 	computer = getComputerChoice();
-	computerChoiceParagraph.textContent = `Computer choice: ${computer}`;
+	computerChoiceParagraph.textContent = `Computer Choice: ${computer}`;
 
 	playRound(computer);
 
