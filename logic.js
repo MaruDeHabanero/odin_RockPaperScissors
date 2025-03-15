@@ -86,7 +86,7 @@ function playGame(humanChoice){
 		counter.textContent = `Human: ${humanScore}\nComputer: ${computerScore}`
 	}
 
-	function checkScores(){
+	function checkEndGame(){
 		if (humanScore < 5 && computerScore < 5) return;
 		
 		const winner = humanScore > computerScore ? "Human" : "Computer";
@@ -108,5 +108,5 @@ function playGame(humanChoice){
 
 	playRound(computer);
 
-	checkScores();
+	checkEndGame();
 }
